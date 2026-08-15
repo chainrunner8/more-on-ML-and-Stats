@@ -1,37 +1,19 @@
-.tiles {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 24px;
-  max-width: 900px;
-  margin: 60px auto;
-}
-
-.tile {
-  padding: 35px;
-  border-radius: 20px;
-  color: black;
-  text-decoration: none;
-  transition: transform 0.2s;
-}
-
-.tile:hover {
-  transform: translateY(-4px);
-}
-
-.tile-1 {
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+/* Better typography */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #17151d;
+    background:
+        linear-gradient(135deg, rgba(251, 194, 235, 0.34), rgba(251, 194, 235, 0) 40%),
+        linear-gradient(315deg, rgba(166, 193, 238, 0.30), rgba(166, 193, 238, 0) 44%),
+        #fff;
+    min-height: 100vh;
 }
 
 /* Main content width */
 #quarto-content {
-    max-width: 900px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 40px 30px;
-}
-
-/* Better typography */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 /* Make figures nicely contained */
@@ -65,84 +47,122 @@ h1, h2, h3 {
    Homepage
 ---------------------------- */
 
-.home {
-    max-width: 1100px;
+#quarto-content.page-layout-full {
+    max-width: none;
+    padding: 0;
+}
+
+#quarto-content.page-layout-full #quarto-document-content {
+    max-width: 1120px;
     margin: 0 auto;
-    padding: 80px 40px;
+    padding: 56px 32px 88px;
 }
 
-.site-title {
-    font-size: 2.8rem;
-    margin-bottom: 60px;
+#quarto-content.page-layout-full #title-block-header {
+    margin: 0 0 44px;
+    padding: 0;
 }
 
-/* The subtle gradient floating behind the content */
-body::before {
-    content: "";
-    position: fixed;
-    width: 700px;
-    height: 700px;
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background:
-        linear-gradient(
-            135deg,
-            rgba(235, 150, 225, 0.18),
-            rgba(130, 160, 240, 0.18)
-        );
-    filter: blur(70px);
-    border-radius: 50%;
-    z-index: -1;
-    pointer-events: none;
+#quarto-content.page-layout-full .quarto-title-block .title {
+    font-size: 3.2rem;
+    line-height: 1.05;
+    letter-spacing: 0;
+    margin: 0;
 }
 
-/* Stack the posts */
-.post-list {
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+    width: 100%;
+}
+
+.post-tile {
+    min-height: 250px;
     display: flex;
     flex-direction: column;
-    gap: 28px;
-    width: 55%;
-    min-width: 600px;
-}
-
-/* The actual clickable tile */
-.post-tile {
-    display: block;
-    padding: 42px 48px;
-
-    /* Almost square corners */
-    border-radius: 2px;
-
-    /* Essentially transparent */
-    background: rgba(255, 255, 255, 0.35);
-
-    /* Very subtle separation from background */
-    border: 1px solid rgba(0, 0, 0, 0.08);
-
+    gap: 18px;
+    justify-content: space-between;
+    padding: 34px;
+    border-radius: 8px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.56));
+    border: 1px solid rgba(23, 21, 29, 0.10);
+    box-shadow: 0 18px 50px rgba(52, 44, 74, 0.08);
     text-decoration: none;
     color: inherit;
-
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease,
+        border-color 0.2s ease,
         background 0.2s ease;
 }
 
-.post-tile:hover {
+.post-tile:hover,
+.post-tile:focus {
     transform: translateY(-3px);
-    background: rgba(255, 255, 255, 0.55);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.68));
+    border-color: rgba(23, 21, 29, 0.18);
+    box-shadow: 0 22px 58px rgba(52, 44, 74, 0.12);
+    color: inherit;
+}
+
+.post-tile:focus-visible {
+    outline: 3px solid rgba(92, 116, 210, 0.38);
+    outline-offset: 4px;
+}
+
+.post-meta,
+.post-link {
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #5d6070;
+    text-transform: uppercase;
 }
 
 .post-title {
-    font-size: 1.7rem;
+    display: block;
+    font-size: 1.55rem;
     font-weight: 650;
-    line-height: 1.2;
+    line-height: 1.18;
+    color: #17151d;
 }
 
-.post-subtitle {
-    margin-top: 14px;
+.post-summary {
+    display: block;
+    flex: 1;
     font-size: 1rem;
-    opacity: 0.65;
+    line-height: 1.55;
+    color: #4c4b57;
+}
+
+.post-link {
+    color: #4f63c7;
+}
+
+@media (max-width: 760px) {
+    #quarto-content.page-layout-full #quarto-document-content {
+        padding: 40px 20px 64px;
+    }
+
+    #quarto-content.page-layout-full #title-block-header {
+        margin-bottom: 32px;
+    }
+
+    #quarto-content.page-layout-full .quarto-title-block .title {
+        font-size: 2.35rem;
+    }
+
+    .post-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .post-tile {
+        min-height: 0;
+        padding: 26px;
+    }
 }

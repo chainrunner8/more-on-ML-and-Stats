@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "",
+    "title": "More on ML & Stats",
     "section": "",
-    "text": "Code\n\n\n\n\n\n\n\nWhy can LASSO shrink to exactly 0, but Ridge can’t? A calculus POV"
+    "text": "Python Why can LASSO shrink to exactly 0, but Ridge can’t? A calculus POV A calculus-first look at why L1 penalties can zero coefficients while L2 penalties only shrink them. Read post"
   },
   {
     "objectID": "python/penalties.html",
