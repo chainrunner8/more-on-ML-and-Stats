@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "More on ML & Stats",
+    "title": "",
     "section": "",
-    "text": "Why can LASSO shrink to exactly 0, but Ridge can’t? A calculus POV"
+    "text": "Code\n\n\n\n\n\n\n\nWhy can LASSO shrink to exactly 0, but Ridge can’t? A calculus POV"
   },
   {
     "objectID": "python/penalties.html",
