@@ -1,7 +1,13 @@
-<div class="tiles">
+---
+title: "More on ML & Stats"
+page-layout: full
+---
 
-<a class="tile tile-1" href="posts/penalties.html">
-  <h2>Why can LASSO shrink to exactly 0, but Ridge can’t? A calculus POV</h2>
-</a>
-
-</div>
+<section class="post-grid" aria-label="Blog posts">
+  <a class="post-tile" href="python/penalties.html">
+    <span class="post-meta">Math</span>
+    <span class="post-title">Why can LASSO shrink to exactly 0, but Ridge can't? A calculus POV</span>
+    <span class="post-summary">A look at why the L1 penalty can zero coefficients while the L2 penalty only shrinks them.</span>
+    <span class="post-link">Read post</span>
+  </a>
+</section>

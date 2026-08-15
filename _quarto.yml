@@ -7,3 +7,7 @@ website:
 format:
   html:
     css: styles.css
+    toc: false
+    code-fold: false
+    code-tools: false
+    highlight-style: github
