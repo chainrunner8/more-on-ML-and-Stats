@@ -2,10 +2,13 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: #17151d;
-    background:
-        linear-gradient(135deg, rgba(251, 194, 235, 0.34), rgba(251, 194, 235, 0) 40%),
-        linear-gradient(315deg, rgba(166, 193, 238, 0.30), rgba(166, 193, 238, 0) 44%),
-        #fff;
+    background-color: #fff;
+    background-image:
+        radial-gradient(ellipse 760px 540px at 46% 22vh, rgba(251, 194, 235, 0.30), rgba(251, 194, 235, 0.10) 42%, rgba(251, 194, 235, 0) 74%),
+        radial-gradient(ellipse 820px 620px at 57% 58vh, rgba(166, 193, 238, 0.26), rgba(166, 193, 238, 0.09) 44%, rgba(166, 193, 238, 0) 76%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
     min-height: 100vh;
 }
 
