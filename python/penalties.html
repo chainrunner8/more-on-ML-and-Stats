@@ -246,7 +246,7 @@ J(\beta_0, \beta_1) &amp; = \frac1n\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i)^2} + \l
 <p>In order to minimise <span class="math inline">\(J\)</span>, we solve the same system as for OLS. Since the L2 penalty does not depend on <span class="math inline">\(\beta_0\)</span>, <span class="math inline">\(\hat\beta_0\)</span> has the same expression as for OLS, so we use the result from the OLS section to substitute <span class="math inline">\(\hat\beta_0\)</span> with its expression in the following. Thus, we’re just left with solving (the hats were omitted for notational simplicity):</p>
 <p><span class="math display">\[
 \begin{align*}
-&amp; \frac{\partial J}{\partial \beta_1} = \frac{\partial}{\partial \beta_1} \left( \frac1n\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i)^2} + \lambda\beta_1^2 \right) = 0 \\
+&amp; \partial_{\beta_1} J = \frac{\partial}{\partial \beta_1} \left( \frac1n\sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i)^2} + \lambda\beta_1^2 \right) = 0 \\
 &amp; \Rightarrow \frac1n\sum_{i}{-2x_i(y_i-\beta_0-\beta_1x_i)} + 2\lambda \beta_1 = 0 \tag*{\small we can divide all by 2}\\
 &amp; \Leftrightarrow \frac1n\left( \beta_1n\overline{x^2} + \sum_i{x_i(\beta_0-y_i}) \right) + \lambda \beta_1 = 0 \tag*{\small where $\overline{x^2} = \frac1n\sum_i{x_i^2}$} \\
 &amp; \Leftrightarrow \beta_1\overline{x^2} + \bar x\bar y - \beta_1\bar x^2 - \overline{xy} + \lambda\beta_1 = 0 \; \tag*{\small where $\overline{xy} = \frac1n\sum_i{x_iy_i}$} \\
@@ -282,7 +282,7 @@ J(\beta_0, \beta_1) &amp; = \frac1n \sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i)^2} + \
 
 \beta_1(\overline{x^2} - \bar x^2) + \bar x\bar y - \overline{xy} + \frac12\frac{\partial}{\partial \beta_1}(\lambda |\beta_1|) &amp; = 0 \\
 
-\text{given} \frac{\partial}{\partial \beta_1}(|\beta_1|) = \frac{\beta_1}{|\beta_1|} = \text{sgn$(\beta_1)$,} \\
+\text{given} \; \forall \beta_1 \neq 0 \; \frac{\partial}{\partial \beta_1}(|\beta_1|) = \frac{\beta_1}{|\beta_1|} = \text{sgn$(\beta_1)$,} \\
 
 \Leftrightarrow \beta_1(\overline{x^2} - \bar x^2) + \bar x\bar y - \overline{xy} + \frac12 \text{sgn$(\beta_1)$}\lambda &amp; = 0
 \end{align*}\]</span></p>
@@ -294,7 +294,7 @@ J(\beta_0, \beta_1) &amp; = \frac1n \sum_{i=1}^n{(y_i-\beta_0-\beta_1x_i)^2} + \
 - \;\; \text{if $\hat\beta_1 &lt; 0$}
 \end{aligned} \right.
 \]</span></p>
-<p>Pay attention to the numerator of <span class="math inline">\(\hat\beta_1\)</span> and notice how if we crank up the regularisation strength such that <span class="math inline">\(\lambda \geq 2(\overline{xy} - \bar x\bar y)\)</span>, then we run into an issue, because the very assumptions under which <span class="math inline">\(\hat\beta_1\)</span> was defined above break in <em>both</em> cases of <span class="math inline">\(\text{sgn}\)</span> <span class="math inline">\((\beta_1)\)</span>; let <span class="math inline">\(\lambda_{lim}=2(\overline{xy} - \bar x\bar y)\)</span> and the <span class="math inline">\(\hat\beta_1\)</span> formula above yields</p>
+<p>What about <span class="math inline">\(\hat\beta_1 = 0\)</span>? There <span class="math inline">\(\partial_{\beta_1} J\)</span> simply does not exist, but the <span class="math inline">\(0\)</span> case might make its comeback in a short moment.<br> Pay attention to the numerator of <span class="math inline">\(\hat\beta_1\)</span> and notice how if we crank up the regularisation strength such that <span class="math inline">\(\lambda \geq 2(\overline{xy} - \bar x\bar y)\)</span>, then we run into an issue, because the very assumptions under which <span class="math inline">\(\hat\beta_1\)</span> was defined above break in <em>both</em> cases of <span class="math inline">\(\text{sgn}\)</span> <span class="math inline">\((\beta_1)\)</span>; let <span class="math inline">\(\lambda_{lim}=2(\overline{xy} - \bar x\bar y)\)</span> and the <span class="math inline">\(\hat\beta_1\)</span> formula above yields</p>
 <ul>
 <li><span class="math inline">\(\hat\beta_1 \leq 0\)</span> in the case <span class="math inline">\(\hat\beta_1 &gt; 0\)</span>, since <span class="math inline">\(\lambda \geq \lambda_{lim}\)</span> makes the numerator 0 or negative,</li>
 <li><span class="math inline">\(\hat\beta_1 \geq 0\)</span> in the case <span class="math inline">\(\hat\beta_1 &lt; 0\)</span>, since <span class="math inline">\(\lambda \geq \lambda_{lim}\)</span> makes the numerator 0 or positive.</li>
