@@ -1,14 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+:root {
+    --font-body: 'EB Garamond', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-home: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
+    --font-article-title: 'Playfair Display', Georgia, serif;
+}
+
 html {
     background: #fff;
 }
 
 /* Better typography */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    text-align: justify;
+    text-justify: inter-word;
     color: #17151d;
     background: #fff;
-    min-height: 100vh;
+    min-height: 50vh;
     overflow-x: hidden;
+    padding-bottom: 0px;
 }
 
 body::before {
@@ -18,8 +29,12 @@ body::before {
     z-index: 0;
     pointer-events: none;
     background:
-        radial-gradient(ellipse 820px 620px at 50% 32%, rgba(251, 194, 235, 0.32), rgba(251, 194, 235, 0.12) 44%, rgba(251, 194, 235, 0) 78%),
-        radial-gradient(ellipse 860px 680px at 52% 68%, rgba(166, 193, 238, 0.28), rgba(166, 193, 238, 0.10) 46%, rgba(166, 193, 238, 0) 80%);
+        radial-gradient(ellipse 820px 620px at 50% 32%, rgba(253, 221, 147, 0.16), rgba(253, 249, 147, 0.14) 44%, rgba(248, 226, 179, 0) 78%),
+        radial-gradient(ellipse 860px 680px at 52% 68%, rgba(238, 231, 166, 0.14), rgba(238, 228, 166, 0.13) 46%, rgba(238, 211, 166, 0) 80%);
+}
+
+body.fullcontent::before {
+    content: none;
 }
 
 #quarto-content,
@@ -30,20 +45,23 @@ body::before {
 
 /* Main content width */
 #quarto-content {
-    max-width: 960px;
+    max-width: 1040px;
     margin: 0 auto;
-    padding: 40px 30px;
+    padding: 0px 0px;
 }
 
 /* Make figures nicely contained */
 .figure {
     margin: 2rem auto;
     text-align: center;
+    border-radius: 1%;
 }
 
+#quarto-content img,
 .figure img {
     max-width: 100%;
     height: auto;
+    border-radius: 1%;
 }
 
 /* Code blocks */
@@ -59,7 +77,124 @@ code {
 
 /* Headings */
 h1, h2, h3 {
+    text-align: left;
     font-weight: 650;
+}
+
+#quarto-content.page-layout-article #title-block-header {
+    display: none;
+}
+
+#quarto-content.page-layout-article .quarto-title-block .title {
+    font-family: var(--font-article-title);
+    font-weight: 600;
+    font-size: 2.1em;
+    line-height: 1.08;
+}
+
+/* Article sticky section headers */
+#quarto-content.page-layout-article {
+    --article-page-width: 1040px;
+    --article-page-padding: 30px;
+    --sticky-heading-bg: rgba(250, 240, 222, 0.96);
+    --sticky-heading-fade: 3.25rem;
+    --sticky-heading-top: 0px;
+    padding-top: 5px;
+}
+
+body:has(#quarto-content.page-layout-article) {
+    background-color: #faf0de; /* Replace with your desired color */
+}
+
+#quarto-content.page-layout-article section.level2 > h2 {
+    position: sticky;
+    top: var(--sticky-heading-top);
+    z-index: 20;
+    padding: 0.75rem 0 0.55rem;
+    background: transparent;
+}
+
+#quarto-content.page-layout-article section.level2 > h2::after {
+    content: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: calc(-1 * var(--sticky-heading-fade));
+    height: var(--sticky-heading-fade);
+    pointer-events: none;
+    background: linear-gradient(
+        to bottom,
+        rgba(250, 240, 222, 0.96),
+        rgba(250, 240, 222, 0)
+    );
+}
+
+#quarto-content.page-layout-article section.level2 > h2.is-stuck {
+    background: var(--sticky-heading-bg);
+}
+
+#quarto-content.page-layout-article section.level2 > h2.is-stuck::after {
+    content: "";
+}
+/* Container aligning image and text-group side-by-side */
+.title-container {
+    display: flex;
+    align-items: center; /* Centers the image with the text block vertically */
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* Restore your custom Quarto title styles to the new manual H1 */
+.title-container h1 {
+    font-family: var(--font-article-title);
+    font-weight: 600;
+    font-size: 2.1em;
+    line-height: 1.08;
+    margin: 0;
+    color: #17151d;
+}
+
+.title-text {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for the date below the title */
+.title-container .post-date {
+    margin: 0.4rem 0 0 0;
+    font-size: 1rem;
+    color: #5d6070;
+    font-family: var(--font-body);
+}
+
+/* Responsive image sizing */
+.title-icon {
+    width: 240px;
+    height: auto;
+    flex-shrink: 0;
+    object-fit: contain;
+}
+
+.footer {
+    font-size: 0.8rem;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+/* Mobile & Tablet responsiveness */
+@media (max-width: 600px) {
+    .title-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .title-icon {
+        width: 48px;
+    }
 }
 
 /* ---------------------------
@@ -67,6 +202,7 @@ h1, h2, h3 {
 ---------------------------- */
 
 #quarto-content.page-layout-full {
+    font-family: var(--font-home);
     max-width: none;
     padding: 0;
 }
@@ -83,7 +219,9 @@ h1, h2, h3 {
 }
 
 #quarto-content.page-layout-full .quarto-title-block .title {
+    font-family: var(--font-home);
     font-size: 3.2rem;
+    font-weight: 750;
     line-height: 1.05;
     letter-spacing: 0;
     margin: 0;

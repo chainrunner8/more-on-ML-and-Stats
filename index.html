@@ -114,6 +114,25 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<script>
+(() => {
+  const article = document.querySelector("#quarto-content.page-layout-article");
+  if (!article) return;
+
+  const headings = article.querySelectorAll("section.level2 > h2");
+  if (!headings.length) return;
+
+  const updateStickyState = () => {
+    headings.forEach((heading) => {
+      heading.classList.toggle("is-stuck", heading.getBoundingClientRect().top <= 1);
+    });
+  };
+
+  updateStickyState();
+  window.addEventListener("scroll", updateStickyState, { passive: true });
+  window.addEventListener("resize", updateStickyState);
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

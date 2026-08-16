@@ -171,16 +171,31 @@ window.Quarto = {
 </header>
 
 
-<p><br> <img src="ceo.png" style="float: right; margin-left: 15px; margin-bottom: 10px;" width="200"> You’re a top statistician (or data scientist, whichever sounds fanciest to your ear) who’s just been hired on a consulting mission for an established company. You’re seated with the CEO, and they’re telling you they want to overhaul the firm’s workforce. They’ve compiled some data on employee performance and from the firm’s financial reports for you, and they’re pretty confident that a subset of their employees does the majority of the work while the others are mostly busy scrolling on Tiktok pretending to work. They also believe the quantity of energy drink that an employee downs every day is linearly associated with revenue and a highly accurate indicator of employee productivity…</p>
+<div class="title-container">
+<img src="cowboy-lasso.jpg" alt="Post Icon" class="title-icon">
+<div class="title-text">
+<h1>
+Why can LASSO shrink to exactly <span class="math inline">\(\boldsymbol{0}\)</span>, but Ridge can’t?<br>A calculus POV
+</h1>
+<br>
+<p class="post-date">
+<i>Aug.&nbsp;16, 2026</i>
+</p>
+</div>
+</div>
+<section id="prologue" class="level2">
+<h2 class="anchored" data-anchor-id="prologue">Prologue</h2>
+<p><img src="ceo.png" style="float: right; margin-left: 15px; margin-bottom: 10px;" width="200"> You’re a top statistician (or data scientist, whichever sounds fanciest to your ear) who’s just been hired on a consulting mission for an established company. You’re seated with the CEO, and they’re telling you they want to overhaul the firm’s workforce. They’ve compiled some data on employee performance and from the firm’s financial reports for you, and they’re pretty confident that a subset of their employees does the majority of the work while the others are mostly busy scrolling on Tiktok pretending to work. They also believe the quantity of energy drink that an employee downs every day is linearly associated with revenue and a highly accurate indicator of employee productivity…</p>
 <p>So they basically want you to perform “employee selection” by modelling the daily company revenue with their energy drink intake. A plethora of questions starts rushing to your head</p>
 <blockquote class="blockquote">
-<p><em>“maybe I should use the Lasso since it can shrink the coefficients of some employees to zero… but how does it do that, by the way? Also, should I prioritise finding the set of employees that best predicts the company revenue, or the smallest decently predictive one that will get the most employees fired thereby saving the firm money?”</em></p>
+<p>“maybe I should use the Lasso since it can shrink the coefficients of some employees to zero… but how does it do that, by the way? Also, should I prioritise finding the set of employees that best predicts the company revenue, or the smallest decently predictive one that will get the most employees fired thereby saving the firm money?”</p>
 </blockquote>
 <p>; the consequences are not yours to bear anyway. You’re just here to give advice.</p>
+<br>
 <center>
 <img src="lasso-ridge.png" alt="drawing" width="700">
 </center>
-<p>The image above comes from <em>Elements of Statistical Learning</em> (<em>ESL</em>) by Hastie, Tibshirani and Friedman. It’s a very nice visualisation (also perfectly correct mathematically, not taking that away) which gives you the gist of Lasso (left in image) vs Ridge (right in image) and why one can zero out slope coefficients and the other not. However if you want an actual mental image of the math behind it that gave birth to this result, you’d need to prove that the smallest red contour of the cost function to intersect with the boundary of the Lasso penalty region defined by <span class="math inline">\(|\beta_1|+|\beta_2|\leq t\)</span> does so at a corner, which is not immediately straightforward to me at least (I haven’t even tried past what I’ve just written though…).</p>
+<p><br> The image above comes from <em>Elements of Statistical Learning</em> (<em>ESL</em>) by Hastie, Tibshirani and Friedman. It’s a very nice visualisation (also perfectly correct mathematically, not taking that away) which gives you the gist of Lasso (left in image) vs Ridge (right in image) and why one can zero out slope coefficients and the other not. However if you want an actual mental image of the math behind it that gave birth to this result, you’d need to prove that the smallest red contour of the cost function to intersect with the boundary of the Lasso penalty region defined by <span class="math inline">\(|\beta_1|+|\beta_2|\leq t\)</span> does so at a corner, which is not immediately straightforward to me at least (I haven’t even tried past what I’ve just written though…).</p>
 <p>The good news is we can also easily show the exact same thing with a bit of high-school level calculus and algebra, in a form that’s more familiar to me as a statistics grad and to some of the readers surely. Depending which branch of math you’re most proficient at, you might benefit from knowing the geometric proof over the calculus one. But I find the simplicity and intuitive aspect| of the calculus route hard to beat. And, if you’re gonna do some more advanced work on various penalties down the line, it’s probably useful to have a clear mental picture of the inner workings of the L1 and L2 penalties in calculus language.</p>
 <p>In <em>ESL</em>, Hastie et al.&nbsp;spend a large part of the sections on penalised regression describing their Bayesian and geometric interpretations, and only give the algebraic expression of the Ridge coefficients without dwelling on the shape of the Lasso objective and how it helps understand the shrinkage to the exact <span class="math inline">\(0\)</span>. So, that’s what we’re going to be doing in this article.</p>
 <section id="enough-with-the-yapping" class="level3">
@@ -189,6 +204,7 @@ window.Quarto = {
 f(x) = \beta_0 + \beta_1x
 \]</span></p>
 <p>Our dataset contains <span class="math inline">\(n\)</span> observations.</p>
+</section>
 </section>
 <section id="prelude-ols" class="level2">
 <h2 class="anchored" data-anchor-id="prelude-ols">Prelude: OLS</h2>
@@ -216,7 +232,7 @@ f(x) = \beta_0 + \beta_1x
 <h3 class="anchored" data-anchor-id="interlude-why-penalise-at-all">Interlude: why penalise at all</h3>
 <p>A penalised regression model adds a regularisation term (or penalty) to the cost function to encourage the shrinkage of coefficients so that their standard error is reduced, which is especially useful when your dataset has high collinearity. I’ll directly quote Hastie &amp; Tibshirani from the <em>ESL</em> book again, as I probably can’t put it better than they do:</p>
 <blockquote class="blockquote">
-<p><em>When there are many correlated variables in a linear regression model,</em> <em>their coefficients can become poorly determined and exhibit high variance.</em> <em>A wildly large positive coefficient on one variable can be canceled by a</em> <em>similarly large negative coefficient on its correlated cousin. By imposing a</em> <em>size constraint on the coefficients, […] this problem is alleviated.</em></p>
+<p>When there are many correlated variables in a linear regression model, their coefficients can become poorly determined and exhibit high variance. A wildly large positive coefficient on one variable can be canceled by a similarly large negative coefficient on its correlated cousin. By imposing a size constraint on the coefficients, […] this problem is alleviated.</p>
 </blockquote>
 </section>
 </section>
@@ -600,12 +616,35 @@ Ridge smallest cost:  0.049 , reached with lambda = 0.0</code></pre>
 <center>
 <img src="end-career-supa.png" alt="drawing" width="400">
 </center>
+<br> <br>
+<div class="footer">
+<p><i>Title picture: CSA Images</i></p>
+</div>
 
 
 </section>
 </section>
 
 </main> <!-- /main -->
+<script>
+(() => {
+  const article = document.querySelector("#quarto-content.page-layout-article");
+  if (!article) return;
+
+  const headings = article.querySelectorAll("section.level2 > h2");
+  if (!headings.length) return;
+
+  const updateStickyState = () => {
+    headings.forEach((heading) => {
+      heading.classList.toggle("is-stuck", heading.getBoundingClientRect().top <= 1);
+    });
+  };
+
+  updateStickyState();
+  window.addEventListener("scroll", updateStickyState, { passive: true });
+  window.addEventListener("resize", updateStickyState);
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
